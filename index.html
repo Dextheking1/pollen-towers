@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pollen Towers: a building of AI-run companies</title>
+<meta name="description" content="Five small companies, one per floor, each run by one person and their Pollinations agents. Tour the tower, step into an office, or apply to rent the next one.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark">PT</div>
+    <div>
+      <h1>Pollen Towers</h1>
+      <p>One building. Five companies. Each run by one person and their agents.</p>
+    </div>
+  </div>
+  <nav class="tabs" aria-label="Main">
+    <button class="tab active" data-view="tower">The tower</button>
+    <button class="tab" data-view="directory">Directory</button>
+    <button class="tab" data-view="apply">Rent an office</button>
+  </nav>
+</header>
+
+<main>
+  <!-- TOWER VIEW -->
+  <section id="view-tower" class="view active">
+    <div class="tower-layout">
+      <div class="stage">
+        <div id="canvas-wrap">
+          <canvas id="scene"></canvas>
+          <div class="stage-hint">Drag to turn the tower. Click a floor to step in.</div>
+          <div class="stage-stats">5 companies &middot; 5 agents &middot; 1 tower</div>
+        </div>
+        <div class="floor-buttons" id="floor-buttons" aria-label="Floors"></div>
+        <div class="honest-note">
+          <strong>How the agents work here:</strong> each company runs on a managed
+          Pollinations prompt agent on the owner's account. Pollinations agents are in
+          alpha and public agents need publisher access, so the built-in agents are
+          private for now. Connect your own Pollinations key in an office to talk to an
+          agent with your own Pollen. If your key cannot reach a private agent yet, the
+          office answers in demo mode and says so.
+        </div>
+      </div>
+
+      <aside class="office" id="office" aria-live="polite">
+        <div class="office-head">
+          <div class="office-floor" id="office-floor">Floor 5</div>
+          <h2 id="office-name">Rampart Audit Studio</h2>
+          <p class="office-kind" id="office-kind">Security audit studio</p>
+        </div>
+        <p class="office-blurb" id="office-blurb"></p>
+
+        <h3>Finished work, brought to the owner</h3>
+        <ul class="board done" id="board-done"></ul>
+
+        <h3>Waiting on the owner's decision</h3>
+        <ul class="board waiting" id="board-waiting"></ul>
+
+        <h3>Talk to the company's agent</h3>
+        <div class="key-row">
+          <input type="password" id="key-input" placeholder="Paste your Pollinations key (sk_ or pk_)" autocomplete="off">
+          <button id="key-save" class="btn small">Connect</button>
+          <button id="key-clear" class="btn small ghost" hidden>Disconnect</button>
+        </div>
+        <p class="key-note" id="key-note">No key connected. The agent answers in demo mode.
+          Your key is stored only in this browser (localStorage) and calls go straight to
+          gen.pollinations.ai. Get a key at enter.pollinations.ai/keys.</p>
+        <div class="chat" id="chat"></div>
+        <form class="chat-form" id="chat-form">
+          <input type="text" id="chat-input" placeholder="Ask this company something..." autocomplete="off">
+          <button type="submit" class="btn">Send</button>
+        </form>
+      </aside>
+    </div>
+  </section>
+
+  <!-- DIRECTORY VIEW -->
+  <section id="view-directory" class="view">
+    <div class="page-head">
+      <h2>Company directory</h2>
+      <p>Every company in the building, and the agent that does its daily work.</p>
+      <input type="search" id="dir-search" placeholder="Search companies, services, agents...">
+    </div>
+    <div class="cards" id="dir-cards"></div>
+  </section>
+
+  <!-- APPLY VIEW -->
+  <section id="view-apply" class="view">
+    <div class="page-head">
+      <h2>Apply to rent the next office</h2>
+      <p>Floor 6 is empty. Tell us what your one-person company would do, and which
+         agent setup you would bring. This demo form saves your application in this
+         browser only.</p>
+    </div>
+    <form class="apply-form" id="apply-form">
+      <label>Your name
+        <input type="text" id="app-name" required placeholder="Jane Doe">
+      </label>
+      <label>Email
+        <input type="email" id="app-email" required placeholder="jane@example.com">
+      </label>
+      <label>Company name
+        <input type="text" id="app-company" required placeholder="Doe Analytics">
+      </label>
+      <label>What would your company do?
+        <textarea id="app-idea" rows="4" required placeholder="One or two sentences. What do your agents do all day, and what do they bring to you?"></textarea>
+      </label>
+      <label>Agents you would run
+        <select id="app-agents">
+          <option>One prompt agent on Pollinations</option>
+          <option>Two or three prompt agents</option>
+          <option>A code agent with its own repo</option>
+          <option>Not sure yet</option>
+        </select>
+      </label>
+      <button type="submit" class="btn wide">Send application</button>
+      <p class="form-ok" id="form-ok" hidden>Application saved in this browser. The tower manager (also an agent) will bring it to the owner. Thanks for applying.</p>
+    </form>
+    <div class="my-apps" id="my-apps"></div>
+  </section>
+</main>
+
+<footer>
+  <p>Built for Pollinations quest #17999. Companies run on
+     <a href="https://gen.pollinations.ai" target="_blank" rel="noopener">Pollinations agents</a>;
+     visitors pay with their own Pollen. Source:
+     <a href="https://github.com/Dextheking1/pollen-towers" target="_blank" rel="noopener">github.com/Dextheking1/pollen-towers</a></p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
