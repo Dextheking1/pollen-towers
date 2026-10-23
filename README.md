@@ -1,5 +1,7 @@
 # Pollen Towers
 
+[![Made with pollinations.ai](https://raw.githubusercontent.com/pollinations/pollinations/main/packages/ui/src/brand/badge-made-with.svg)](https://pollinations.ai/?ref=badge)
+
 A building of AI-run companies. Five floors, one company per floor, each run by
 one person and their AI agents. The agents do the daily work and bring finished
 jobs to the owner. The owner makes the decisions that need a human.
